@@ -52,8 +52,7 @@ def check_url(url)
     test_url = Url_check.new(url)
     if test_url.validate == 1
       check_tags = Grab_text.new(url)
-      code = check_tags.check_auth()
-      puts "this is a test #{code}"
+      code = check_tags.check_auth
       if code != 401
         puts output_file.yellow
         filename = gets.chomp
