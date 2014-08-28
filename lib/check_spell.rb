@@ -1,10 +1,5 @@
 require 'rubygems'
-require 'unirest'
 require 'open-uri'
-require 'nokogiri'
-require 'uri'
-require 'net/http'
-require 'net/https'
 require 'rexml-expansion-fix'
 
 
@@ -12,14 +7,6 @@ class Spellcheck
 
   def initialize(sentence)
    @sentence = sentence
-  end
-  
-  def test
-   puts @sentence
-  end
-
-  def print_test
-    puts @sentence
   end
   
   def create_write(filename)
