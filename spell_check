@@ -1,0 +1,101 @@
+#!/usr/bin/env ruby
+
+require_relative './lib/check_url'
+require_relative './lib/extract_tags'
+require_relative './lib/check_spell'
+require 'highline/import'
+require 'smart_colored/extend'
+
+def instruction 
+<<EOS
+
+# Enter the url to be checked
+# Enter 'Q' or 'q' to exit 
+# Enter 'Help' for usage information
+ 
+EOS
+end
+
+def auth 
+<<EOS 
+
+This page requires AUTHENTICATION'
+EOS
+end
+
+def output_file
+<<EOS
+
+Please enter output filename.
+EOS
+end
+
+def menu 
+  puts instruction
+  url = gets.chomp
+  controller(url)
+end
+
+def controller(url)
+  if url == "q" || url == "Q"
+    puts "Bye!"
+  elsif url == ""
+    puts "Invalid url"
+    menu
+  else
+    check_url(url)
+  end
+end
+
+def check_url(url)
+  if url.length > 0
+    test_url = Url_check.new(url)
+    if test_url.validate == 1
+      check_tags = Grab_text.new(url)
+      code = check_tags.check_auth()
+      puts "this is a test #{code}"
+      if code != 401
+        puts output_file.yellow
+        filename = gets.chomp
+        text = check_tags.print_text
+        file_created = Spellcheck.new(text)
+        file_created.create_write(filename)
+        output = file_created.run_script(filename)
+        puts
+        puts output.yellow
+        puts
+      else
+        puts auth.red
+        username = ask("Username: ".yellow)
+        password = ask("Password: ".yellow) { |q| q.echo = false}
+        text_content = check_tags.print_auth_page(username, password)
+        puts output_file.yellow
+        filename = gets.chomp
+        file_created = Spellcheck.new(text_content)
+        file_created.create_write(filename)
+        output = file_created.run_script(filename)
+        puts
+        puts output.yellow
+        puts
+      end
+    else 
+      puts "#{url} is not a valid url. Please enter a valid url"
+      puts menu
+    end 
+  end
+end
+
+def print_html(url)
+  if url.length > 0 
+    test = Url_check.new(url)
+    if test.validate == 1
+      html = Grab_text.new(url)
+      html.print_html
+    else 
+      puts "#{url} is not a valid url. Please enter a valid url"
+      puts menu
+    end 
+  end
+end 
+
+menu
