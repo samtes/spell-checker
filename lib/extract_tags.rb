@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
+require 'unirest'
 
 class Grab_text
 
