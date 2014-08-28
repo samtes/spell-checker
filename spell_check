@@ -11,12 +11,8 @@ def instruction
 
 Tool usage instruction:
 
-  <url> and enter - to run the tool
-
-   Example <http://this-is-the-url> <enter>
-
+  <url> and enter - to run the tool -- Example <http://this-is-the-url> <enter>
   Q or q - to exit the tool 
-
   Help - to display the menu
  
 EOS
