@@ -9,12 +9,15 @@ require 'smart_colored/extend'
 def instruction 
 <<EOS
 
-<url> and enter - to run the tool
+Tool usage instruction:
+
+  <url> and enter - to run the tool
+
    Example <http://this-is-the-url> <enter>
 
-Q or q - to exit the tool 
+  Q or q - to exit the tool 
 
-Help - to display the menu
+  Help - to display the menu
  
 EOS
 end
