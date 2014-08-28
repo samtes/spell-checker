@@ -8,8 +8,8 @@ class Grab_text
     @file = file
   end
 
-  def check_auth(username='', password='')
-   response = Unirest.get @file, auth:{:user=>username, :password=>password}
+  def check_auth
+   response = Unirest.get @file
    response.code
   end
 
