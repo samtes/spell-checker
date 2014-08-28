@@ -17,9 +17,7 @@ class Spellcheck
 
   def run_script(filename)
     name = clean_file(filename)
-
     "Please run 'aspell -c #{name}' to start spell check."
-
   end
 
 private
